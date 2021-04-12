@@ -1,7 +1,9 @@
 package com.kumaran.cricketscore;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -19,15 +22,18 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageView team1_logo;
-    ImageView team2_logo;
-    TextView team1_name;
-    TextView team2_name;
-    TextView team1_score;
-    TextView team2_score;
+    private ImageView team1_logo;
+    private ImageView team2_logo;
+    private TextView team1_name;
+    private TextView team2_name;
+    private TextView team1_score;
+    private TextView team2_score;
+    private LottieAnimationView lottieAnimationView;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -41,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private ScoreboardAdapter scoreboardAdapter;
-
+    private TimerTask timerTask;
 
 
     @Override
@@ -55,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         team2_name = findViewById(R.id.team2_name);
         team1_score = findViewById(R.id.team1_score);
         team2_score = findViewById(R.id.team2_score);
+        lottieAnimationView = findViewById(R.id.animation_view);
 
         tabLayout = findViewById(R.id.team_tab);
         viewPager = findViewById(R.id.team_pager);
@@ -102,6 +109,48 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+        firestore.collection("live_match").document("lastrun").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                long run = (long) value.get("run");
+                switch((int) run){
+                    case 0:
+                        lottieAnimationView.setAnimation(R.raw.zero);
+                        break;
+                    case 1:
+                        lottieAnimationView.setAnimation(R.raw.one);
+                        break;
+                    case 2:
+                        lottieAnimationView.setAnimation(R.raw.two);
+                        break;
+                    case 3:
+                        lottieAnimationView.setAnimation(R.raw.three);
+                        break;
+                    case 4:
+                        lottieAnimationView.setAnimation(R.raw.four);
+                        break;
+                    case 6:
+                        lottieAnimationView.setAnimation(R.raw.six);
+                }
+                lottieAnimationView.setVisibility(View.VISIBLE);
+                lottieAnimationView.playAnimation();
+                Timer timer = new Timer();
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                lottieAnimationView.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
+                };
+                timer.schedule(timerTask,3500);
+
+
+            }
+        });
 
 
 
@@ -109,9 +158,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
-        //firestore.collection("live_match").document("team1").get().
 
 
 

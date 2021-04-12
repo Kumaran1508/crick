@@ -112,6 +112,15 @@
                 android:textSize="10dp"
                 android:gravity="center"/>
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-80dp"
+                android:visibility="invisible"
+                android:id="@+id/animation_view"
+                />
+
 
 
 
