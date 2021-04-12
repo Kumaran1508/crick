@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="15dp"
+            android:gravity="left"
+            android:textColor="#000"
+            android:layout_weight="4"
+            android:id="@+id/player_name"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:id="@+id/player_runs"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:id="@+id/player_balls"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="4s"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:id="@+id/player_fours"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="6s"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:id="@+id/player_sixes"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SR"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_weight="2"
+            android:id="@+id/player_strike_rate"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="NOT OUT"
+        android:textColor="#0f0"
+        android:id="@+id/player_status"/>
+
+</LinearLayout>

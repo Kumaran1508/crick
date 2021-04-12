@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:background="@color/light_background">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="50dp"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/team1_logo"
+                    android:src="@drawable/app_logo"
+                    android:scaleType="centerInside"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="-100dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="50dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/team2_logo"
+                    android:src="@drawable/app_logo"
+                    android:scaleType="centerInside"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/vs_icon"
+                android:layout_marginTop="-75dp"
+                android:layout_marginBottom="25dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:text="Team1"
+                android:id="@+id/team1_name"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textSize="15dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:text="Team2"
+                android:id="@+id/team2_name"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="-40dp"
+                android:layout_gravity="right"
+                android:textSize="15dp"
+                android:gravity="center"/>
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:text="Yet to bat"
+                android:id="@+id/team1_score"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textSize="10dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:text="Yet to bat"
+                android:id="@+id/team2_score"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="-26dp"
+                android:layout_gravity="right"
+                android:textSize="10dp"
+                android:gravity="center"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/team_tab"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        android:background="@color/red" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/team_pager"/>
+
+</LinearLayout>
