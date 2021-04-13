@@ -1,5 +1,6 @@
 package com.kumaran.cricketscore;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -35,17 +38,18 @@ public class HomeActivity extends AppCompatActivity {
     private TextView team2_score;
     private LottieAnimationView lottieAnimationView;
 
-    TabLayout tabLayout;
-    ViewPager2 viewPager;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
 
-    ArrayList<String> teamnamesshort = new ArrayList<>();
-    ArrayList<String> teamNames;
-    ArrayList<Long> scores;
-    ArrayList<Long> wickets;
-    ArrayList<String> overs;
+    private ArrayList<String> teamnamesshort = new ArrayList<>();
+    private ArrayList<String> teamNames;
+    private ArrayList<Long> scores;
+    private ArrayList<Long> wickets;
+    private ArrayList<String> overs;
 
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     private ScoreboardAdapter scoreboardAdapter;
     private TimerTask timerTask;
 
@@ -75,15 +79,29 @@ public class HomeActivity extends AppCompatActivity {
                 teamnamesshort = (ArrayList<String>) documentSnapshot.get("abbr");
                 new TabLayoutMediator(tabLayout, viewPager,
                         (tab, position) -> tab.setText(teamnamesshort.get(position))).attach();
+
+                firebaseStorage.getReference("team_logos/"+teamnamesshort.get(0).toLowerCase()+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getApplicationContext())
+                                .load(uri)
+                                .centerInside()
+                                .into(team1_logo);
+                    }
+                });
+
+                firebaseStorage.getReference("team_logos/"+teamnamesshort.get(1).toLowerCase()+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getApplicationContext())
+                                .load(uri.toString())
+                                .centerInside()
+                                .into(team2_logo);
+                    }
+                });
             }
         });
 
-        firestore.collection("live_match").document("teams").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                teamNames = (ArrayList<String>) documentSnapshot.get("name");
-            }
-        });
 
         firestore.collection("live_match").document("teams").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
