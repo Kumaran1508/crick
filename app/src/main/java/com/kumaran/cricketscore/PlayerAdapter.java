@@ -48,7 +48,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
             holder.strikerate.setText(player.get("strike_rate").toString());
             holder.status.setText(player.get("status").toString());
 
-            if(holder.status.getText()=="OUT") holder.status.setTextColor(R.color.red);
+            if(holder.status.getText().toString().contentEquals("OUT")) holder.status.setTextColor(R.color.red);
         }
         catch (Exception e){
             Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
